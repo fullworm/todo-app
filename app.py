@@ -1,10 +1,10 @@
-import PySimpleGUI
+import PySimpleGUI as sg
 import os
 
 tasks = []
-
+listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True)
 layout = [[sg.Button(button_text= "Add", key='-add-'), sg.Button(button_text= "Remove", key='-remove-')],
-          [sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-')]]
+          [listbox]]
 
 window = sg.Window("Todo App", layout)
 
@@ -22,5 +22,10 @@ while RUN:
         else:
             tasks.append(Addtask)
             window['-list-'].update(tasks)
+    if event =='-remove-':
+        selected = listbox.get()[0]
+        tasks.remove(selected)
+        window['-list-'].update(tasks)
+        
 
 window.close()
