@@ -1,8 +1,12 @@
 import PySimpleGUI as sg
 import os
+import funcs as fc
 
-tasks = []
-listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True)
+path = "tasks.txt"
+
+tasks = fc.ReadFile(path)
+
+listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
 layout = [[sg.Button(button_text= "Add", key='-add-'), sg.Button(button_text= "Remove", key='-remove-')],
           [listbox]]
 
@@ -20,12 +24,14 @@ while RUN:
         if Addtask == '':
             sg.popup("Please enter a valid task")
         else:
-            tasks.append(Addtask)
+            tasks.append(f"({len(tasks)+1}) " + Addtask)
+            fc.WriteList(tasks, path)
             window['-list-'].update(tasks)
     if event =='-remove-':
         selected = listbox.get()[0]
         tasks.remove(selected)
         window['-list-'].update(tasks)
-        
+
+
 
 window.close()
