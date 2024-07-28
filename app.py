@@ -7,15 +7,16 @@ path = "tasks.txt"
 tasks = fc.ReadFile(path)
 
 listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
+
 layout = [[sg.Button(button_text= "Add", key='-add-'), sg.Button(button_text= "Remove", key='-remove-')],
           [listbox]]
 
 window = sg.Window("Todo App", layout)
 
-
-
 RUN = True
+
 while RUN:
+
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         RUN = False
@@ -31,7 +32,5 @@ while RUN:
         selected = listbox.get()[0]
         tasks.remove(selected)
         window['-list-'].update(tasks)
-
-
 
 window.close()
