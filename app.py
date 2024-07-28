@@ -8,7 +8,7 @@ tasks = fc.ReadFile(path)
 
 listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
 
-layout = [[sg.Button(button_text= "Add", key='-add-'), sg.Button(button_text= "Remove", key='-remove-')],
+layout = [[sg.Button(image_source="plus.png", key='-add-'), sg.Button(image_source="minus.png", key='-remove-')],
           [listbox]]
 
 window = sg.Window("Todo App", layout)
