@@ -12,3 +12,7 @@ def WriteList(tasks, path):
             content.writelines(task + "\n")
         content.close()
     return
+
+def ClearList(path):
+    open(path, "w").close()
+    return

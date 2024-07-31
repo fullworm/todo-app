@@ -1,15 +1,14 @@
 import PySimpleGUI as sg
-import os
 import funcs as fc
 
 path = "tasks.txt"
 
 tasks = fc.ReadFile(path)
 
-listbox = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
+List_box = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
 
-layout = [[sg.Button(image_source="plus.png", key='-add-'), sg.Button(image_source="minus.png", key='-remove-')],
-          [listbox]]
+layout = [[sg.Button(image_source="plus.png", key='-add-'), sg.Button(image_source="minus.png", key='-remove-'), sg.Button(button_text="Clear", key="-clear-")],
+          [List_box]]
 
 window = sg.Window("Todo App", layout)
 
@@ -29,8 +28,15 @@ while RUN:
             fc.WriteList(tasks, path)
             window['-list-'].update(tasks)
     if event =='-remove-':
-        selected = listbox.get()[0]
-        tasks.remove(selected)
+        if values['-list-']:
+            selected = values['-list-'][0]
+            tasks.remove(selected)
+            window['-list-'].update(tasks)
+        else:
+            sg.popup("Please select a task for removal")
+    if event == '-clear-':
+        tasks.clear()
+        fc.ClearList(path)
         window['-list-'].update(tasks)
 
 window.close()
