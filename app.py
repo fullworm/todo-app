@@ -5,7 +5,10 @@ path = "tasks.txt"
 
 tasks = fc.ReadFile(path)
 
-List_box = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, font=('Calibri',14))
+Context_menu= ['&Right', ['Add context', 'Edit task', 'Help']]
+
+List_box = sg.Listbox(tasks, size=(70,30), no_scrollbar=True, key='-list-', enable_events=True, right_click_menu=Context_menu,
+                      highlight_background_color="White",highlight_text_color="Green",font=('Calibri',14))
 
 layout = [[sg.Button(image_source="plus.png", key='-add-'), sg.Button(image_source="minus.png", key='-remove-'), sg.Button(button_text="Clear", key="-clear-")],
           [List_box]]
