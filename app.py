@@ -28,13 +28,17 @@ while RUN:
             sg.popup("Please enter a valid task")
         else:
             tasks.append(f"({len(tasks)+1}) " + Addtask)
+            tasks =  fc.ReplaceNumber(tasks)
             fc.WriteList(tasks, path)
             window['-list-'].update(tasks)
     if event =='-remove-':
         if values['-list-']:
             selected = values['-list-'][0]
             tasks.remove(selected)
+            tasks = fc.ReplaceNumber(tasks)
+            fc.WriteList(tasks, path)
             window['-list-'].update(tasks)
+
         else:
             sg.popup("Please select a task for removal")
     if event == '-clear-':
