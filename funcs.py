@@ -1,3 +1,6 @@
+import re as re
+
+
 def ReadFile(path):
     x = []
     with open(path, "r") as tasks:
@@ -16,3 +19,11 @@ def WriteList(tasks, path):
 def ClearList(path):
     open(path, "w").close()
     return
+
+def ReplaceNumber(tasks: list) -> list:
+    new_tasks = []
+    for task in tasks:
+        new_task = re.sub(r'\d+', f"{len(new_tasks)+1}", task)
+        new_tasks.append(new_task)
+    return new_tasks
+
